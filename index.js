@@ -15,6 +15,17 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.get('/api/get', (req, res) => {
+    const sqlSelect = "Select * from movie_reviews";
+    db.query(sqlSelect, (err, result) => {
+        if(err) {
+            console.log(err);
+        }
+        
+        res.send(result);
+    });
+})
+
 app.get('/', (req, res) => {
     const sqlInsert = "Insert into crud_react.movie_reviews (movieName, movieReview) VALUES('Al filo del mañana', 'Buena película')";
     db.query(sqlInsert, (err, result) => {
